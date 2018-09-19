@@ -27,6 +27,29 @@ Then restart the docker service:
 
      ```sudo service docker restart```
 
+
+
+### Modify readthedocs/Dockerfile 
+I had server issues installing pip as there seems to be a conflict between debian/ubuntu manged python dependencies. 
+I managed to fix this by editing the readthedocs/Dockerfile: 
+
+The installation of the test dependencies failed: 
+
+      RUN pip install wheel && pip install  virtualenv  supervisor
+
+I resolved it by changing it to this :  
+
+     RUN apt-get  install python-pip
+     RUN python -m pip install --upgrade pip setuptools wheel
+
+     RUN pip install wheel
+     RUN pip install virtualenv
+     RUN pip install supervisor
+
+
+# Here's the original description 
+
+
 A [Docker](https://hub.docker.com/r/floross/docker-readthedocs/) container for
 [ReadTheDocs](https://github.com/rtfd/readthedocs.org) (RTD) which works and 
 with many goodies.

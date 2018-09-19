@@ -31,7 +31,11 @@ RUN apt-get -qq update && \
         nginx && \
     rm -rf /var/lib/apt/lists/*
 
-# Install test dependencies
+# Install test dependencies 
+# This failed: 
+#       RUN pip install wheel && pip install  virtualenv  supervisor
+
+# the code below workd for me
 RUN apt-get  install python-pip  
 RUN python -m pip install --upgrade pip setuptools wheel
 
