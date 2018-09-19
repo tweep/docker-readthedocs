@@ -1,5 +1,32 @@
 # ReadTheDocs in Docker
 
+Credits to Floross https://github.com/floross/docker-readthedocs 
+
+I had some simple issues within the company to set readthedocs up. These were related to two things: 
+
+- I had issues with pip virutalenv / wheeel install  so modified the readthedoc/Dockerfile 
+- I had to modify my actual cloud machine ( Ubuntu 18.04 ) as the docker installation did not retrieve 
+  DNS correctly. The error was:
+ 
+    ```Failed to install elasticsearch/elasticsearch-analysis-icu/2.7.0, reason: failed to download out of all possible locations..., use --verbose to get detailed information```  
+
+
+This post helped me fixing this issue:  https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/
+
+####  Modify the daemon.json file (on the host which is running Docker service), not in docker !
+
+Modfify daemon.json to add new name servers, so elasticsearch url can be resolved: 
+
+      Ubuntu-18.04:sudo vi /etc/docker/daemon.json
+
+      {
+          "dns": ["128.137.240.235", "128.137.241.235", "10.0.0.2", "8.8.8.8"]
+      }
+
+Then restart the docker service:
+
+     ```sudo service docker restart```
+
 A [Docker](https://hub.docker.com/r/floross/docker-readthedocs/) container for
 [ReadTheDocs](https://github.com/rtfd/readthedocs.org) (RTD) which works and 
 with many goodies.

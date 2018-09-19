@@ -32,9 +32,14 @@ RUN apt-get -qq update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install test dependencies
-RUN pip install wheel && pip install \
-    virtualenv \
-    supervisor
+RUN apt-get  install python-pip  
+RUN python -m pip install --upgrade pip setuptools wheel
+
+RUN pip install wheel 
+
+RUN pip install virtualenv  
+
+RUN pip install supervisor
 
 # Setting up virtualenv
 RUN virtualenv /venv
