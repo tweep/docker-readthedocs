@@ -77,6 +77,8 @@ Create an environment file based on the default one and point compose to it:
 
 Adjust to your desired configuration (in `$ENV_NAME.env` file), then start:
 
+
+    $ cd docker-readthedocs
     $ docker-compose up
 
 ### Standalone
